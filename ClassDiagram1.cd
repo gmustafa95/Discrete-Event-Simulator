@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Tecan.DiscreteEventSimulator.PriorityQueue&lt;TKey, TValue&gt;" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAAAAAAAIAAAACAAAAAgQIQAAABCAA=</HashCode>
+      <FileName>PriorityQueue.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_SimulationEvent" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Tecan.DiscreteEventSimulator.Simulation.SimulationEvent">
+    <Position X="10" Y="0.5" Width="2.25" />
+    <AssociationLine Name="_thread" Type="Tecan.DiscreteEventSimulator.Simulation.SimulationThreadInfo">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.083" Y="0.205" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAABAEAQA=</HashCode>
+      <FileName>Simulation\SimulationEvent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_thread" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Tecan.DiscreteEventSimulator.Simulation.SimulationThreadInfo">
+    <Position X="10" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAQAAAAAAAAAAAAAIBAIAAAAAAAAAAQA=</HashCode>
+      <FileName>Simulation\SimulationThreadInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tecan.DiscreteEventSimulator.Simulation.Simulator" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="2.5" />
+    <AssociationLine Name="_timeLine" Type="Tecan.DiscreteEventSimulator.PriorityQueue&lt;TKey, TValue&gt;">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.351" Y="0.078" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AQAAAAMAACAAAAAgEAAAAAEAAAAIABAAYIAAAAAAAQA=</HashCode>
+      <FileName>Simulation\Simulator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_timeLine" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="Tecan.DiscreteEventSimulator.IDiscreteEventSimulator">
+    <Position X="2.25" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAACAAAAAAEAAAAAAAAAAIAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>IDiscreteEventSimulator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Tecan.DiscreteEventSimulator.IPriorityQueue&lt;TKey, TValue&gt;">
+    <Position X="6.25" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAAAAAAAIAAAACAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>IPriorityQueue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
