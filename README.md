@@ -1,2 +1,6 @@
 # Discrete-Event-Simulator
-An open source discrete event simulation library based on C# / .NET
+An open source C#-based discrete event simulation library.
+
+### Example
+
+### Installation
