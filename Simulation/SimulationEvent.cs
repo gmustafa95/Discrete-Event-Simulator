@@ -16,6 +16,7 @@ namespace DiscreteEventSimulator.Simulation
 
         public SimulationEvent(TimeSpan time, SimulationThreadInfo thread)
         {
+            if (thread == null) throw new ArgumentNullException(nameof(thread));
             Time = time;
             _thread = thread;
         }

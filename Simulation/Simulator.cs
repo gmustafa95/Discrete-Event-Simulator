@@ -20,6 +20,7 @@ namespace DiscreteEventSimulator.Simulation
 
         public void AddThread(Thread thread)
         {
+            if (thread == null) throw new ArgumentNullException(nameof(thread));
             _threads.Add(thread, new SimulationThreadInfo());
         }
 
@@ -30,6 +31,9 @@ namespace DiscreteEventSimulator.Simulation
 
         public void Delay(TimeSpan delay, Thread thread)
         {
+            if (thread == null) throw new ArgumentNullException(nameof(thread));
+            if (!_threads.ContainsKey(thread))
+                throw new InvalidOperationException("Thread must be added to the simulator before calling Delay.");
             _threads[thread].Delay(this, delay);
         }
 
@@ -71,6 +75,9 @@ namespace DiscreteEventSimulator.Simulation
 
         public TimeSpan GetTime(Thread thread)
         {
+            if (thread == null) throw new ArgumentNullException(nameof(thread));
+            if (!_threads.ContainsKey(thread))
+                throw new InvalidOperationException("Thread must be added to the simulator before calling GetTime.");
             return _threads[thread].GetCurrentTime();
         }
 
@@ -99,6 +106,7 @@ namespace DiscreteEventSimulator.Simulation
 
         internal void PushEvent(SimulationEvent ev)
         {
+            if (ev == null) throw new ArgumentNullException(nameof(ev));
             lock (_lock)
             {
                 _timeLine.Push(ev.Time, ev);
@@ -117,6 +125,12 @@ namespace DiscreteEventSimulator.Simulation
             {
                 if (disposing)
                 {
+                    // Dispose all pending simulation events
+                    while (!_timeLine.IsEmpty)
+                    {
+                        var ev = _timeLine.Pop();
+                        ev.Value?.Dispose();
+                    }
                     _completionEvent?.Dispose();
                 }
                 _disposed = true;
