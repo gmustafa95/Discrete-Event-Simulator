@@ -12,7 +12,7 @@ namespace DiscreteEventSimulator.Usage
 
         public Driver(IDiscreteEventSimulator eventSimulator, int position)
         {
-            _eventSimulator = eventSimulator;
+            _eventSimulator = eventSimulator ?? throw new ArgumentNullException(nameof(eventSimulator));
             _lastPosition = position;
         }
 
@@ -27,6 +27,10 @@ namespace DiscreteEventSimulator.Usage
             }
 
             var time = _eventSimulator.GetTime();
+            if (_duration == 0)
+            {
+                return target.Value;
+            }
             var completed = (time - _startTime).TotalMilliseconds / _duration;
             return _lastPosition + completed * (target.Value - _lastPosition);
         }
