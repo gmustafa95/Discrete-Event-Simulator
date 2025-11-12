@@ -5,12 +5,13 @@ using System.Threading;
 
 namespace DiscreteEventSimulator.Simulation
 {
-    public class Simulator : IDiscreteEventSimulator
+    public class Simulator : IDiscreteEventSimulator, IDisposable
     {
         private readonly Dictionary<Thread, SimulationThreadInfo> _threads = new Dictionary<Thread, SimulationThreadInfo>();
         private readonly PriorityQueue<TimeSpan, SimulationEvent> _timeLine = new PriorityQueue<TimeSpan, SimulationEvent>();
         private readonly ManualResetEventSlim _completionEvent = new ManualResetEventSlim();
         private readonly object _lock = new object();
+        private bool _disposed = false;
         public TimeSpan Time
         {
             get;
@@ -101,6 +102,24 @@ namespace DiscreteEventSimulator.Simulation
             lock (_lock)
             {
                 _timeLine.Push(ev.Time, ev);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _completionEvent?.Dispose();
+                }
+                _disposed = true;
             }
         }
     }
